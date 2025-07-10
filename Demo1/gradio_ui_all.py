@@ -7,6 +7,7 @@ import vertexai
 from vertexai.vision_models import Image, MultiModalEmbeddingModel
 from vertexai import rag
 from vertexai.generative_models import GenerativeModel, Tool
+from vertexai.generative_models import SafetySetting
 
 # Vertex AI & Firestore 配置
 PROJECT_ID = "a94-project-ai-specialization"
@@ -20,7 +21,7 @@ model = MultiModalEmbeddingModel.from_pretrained("multimodalembedding@001")
 # -------- 文本RAG检索相关 --------
 corpus_name = "projects/a94-project-ai-specialization/locations/us-central1/ragCorpora/3379951520341557248"
 
-def rag_gemini_tool_query(query_text: str):
+def rag_gemini_tool_query(query_text: str, system_instruction: str = None):
     try:
         rag_retrieval_tool = Tool.from_retrieval(
             retrieval=rag.Retrieval(
@@ -37,10 +38,43 @@ def rag_gemini_tool_query(query_text: str):
                 ),
             )
         )
+        generation_config = {
+            "max_output_tokens": 2048,
+            "temperature": 0.9,
+            "top_p": 0.95,
+            "seed": 0,
+        }
+        safety_settings = [
+            SafetySetting(
+                category=SafetySetting.HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+                threshold=SafetySetting.HarmBlockThreshold.OFF
+            ),
+            SafetySetting(
+                category=SafetySetting.HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+                threshold=SafetySetting.HarmBlockThreshold.OFF
+            ),
+            SafetySetting(
+                category=SafetySetting.HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+                threshold=SafetySetting.HarmBlockThreshold.OFF
+            ),
+            SafetySetting(
+                category=SafetySetting.HarmCategory.HARM_CATEGORY_HARASSMENT,
+                threshold=SafetySetting.HarmBlockThreshold.OFF
+            ),
+        ]
+        if not system_instruction:
+            system_instruction = "你是一个专业的电商导购助手，请用简洁、友好的语气推荐商品，并附上理由。"
         rag_model = GenerativeModel(
-            model_name="gemini-2.0-flash-001", tools=[rag_retrieval_tool]
+            model_name="gemini-2.0-flash-001",
+            tools=[rag_retrieval_tool],
+            system_instruction=system_instruction
         )
-        response = rag_model.generate_content(query_text)
+        response = rag_model.generate_content(
+            query_text,
+            generation_config=generation_config,
+            safety_settings=safety_settings,
+            stream=False
+        )
         return response.text
     except Exception as e:
         return f"查询出错: {str(e)}"
@@ -48,7 +82,9 @@ def rag_gemini_tool_query(query_text: str):
 def query_rag(query_text):
     if not query_text.strip():
         return "请输入查询内容"
-    result = rag_gemini_tool_query(query_text)
+    # 可根据需要自定义system_instruction
+    system_instruction = "你是一个专业的电商导购助手，请用简洁、友好的语气推荐商品，并附上理由。"
+    result = rag_gemini_tool_query(query_text, system_instruction=system_instruction)
     return result
 
 # -------- 图片向量检索相关 --------
