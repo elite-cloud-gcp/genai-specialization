@@ -1,4 +1,4 @@
-# DIY RAG Demo - Cloud Function 集成
+# DIY RAG Demo 
 
 这个项目实现了一个完整的 RAG (Retrieval-Augmented Generation) 系统，包括文件导入、向量搜索和查询功能。
 
