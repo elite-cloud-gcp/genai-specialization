@@ -64,7 +64,19 @@ def rag_gemini_tool_query(query_text: str, system_prompt: str, generation_config
 # 示例使用
 if __name__ == "__main__":
     
-    system_prompt = "You are a helpful assistant who can answer questions about the products in the corpus and other assorted questions."
+    system_prompt = f"""
+    你是专业的电子商务产品比较专家。
+    请根据以下提供的两个产品的信息，详细比较它们之间在用户关注点上的异同。
+    最终，请总结它们的优缺点，并给出一个购买建议。
+       
+    请按以下步骤思考并回答：
+    1.  **产品特点提取：** 从<产品A信息>和<产品B信息>中分别提取与“用户关注点”直接相关的关键特点。
+    2.  **逐点对比：** 针对每个关键特点，对比产品A和产品B的异同。
+    3.  **优缺点总结：** 根据对比结果，总结产品A和产品B的各自优缺点。
+    4.  **购买建议：** 结合所有分析，为用户提供一个基于其关注点的个性化购买建议。
+    
+    请直接给出最终的比较结果和建议，格式清晰。
+    """
     contents = "I want to buy Vishudh brand products, what products can you recommend and are also cheap?" 
 
     generation_config = {

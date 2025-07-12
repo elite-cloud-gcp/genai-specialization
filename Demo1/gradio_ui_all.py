@@ -152,15 +152,56 @@ with gr.Blocks(title="RAG+图片向量检索") as demo:
             container=True,
             scale=1
         )
+
+        # 新增：满意度和人工按钮
+        with gr.Row(visible=False) as feedback_row:
+            gr.Markdown("您对本次答复是否满意？")
+            satisfied_btn = gr.Button("满意", variant="secondary")
+            unsatisfied_btn = gr.Button("不满意", variant="secondary")
+        with gr.Row(visible=False) as human_row:
+            human_btn = gr.Button("转接人工", variant="stop")
+            human_status = gr.Markdown(visible=False)
+
+        # 查询按钮逻辑
+        def query_and_show_feedback(query):
+            answer = query_rag(query)
+            return answer, gr.update(visible=True), gr.update(visible=False), gr.update(visible=False)
         query_button.click(
-            fn=query_rag,
+            fn=query_and_show_feedback,
             inputs=query_input,
-            outputs=result_output
+            outputs=[result_output, feedback_row, human_row, human_status]
         )
         query_input.submit(
-            fn=query_rag,
+            fn=query_and_show_feedback,
             inputs=query_input,
-            outputs=result_output
+            outputs=[result_output, feedback_row, human_row, human_status]
+        )
+
+        # 满意按钮逻辑
+        def satisfied_feedback():
+            return gr.update(visible=False), gr.update(visible=False)
+        satisfied_btn.click(
+            fn=satisfied_feedback,
+            inputs=None,
+            outputs=[feedback_row, human_row]
+        )
+
+        # 不满意按钮逻辑
+        def unsatisfied_feedback():
+            return gr.update(visible=False), gr.update(visible=True)
+        unsatisfied_btn.click(
+            fn=unsatisfied_feedback,
+            inputs=None,
+            outputs=[feedback_row, human_row]
+        )
+
+        # 转人工按钮逻辑
+        def transfer_to_human():
+            return gr.update(visible=True, value="已转接人工，请稍候..."), gr.update(visible=False)
+        human_btn.click(
+            fn=transfer_to_human,
+            inputs=None,
+            outputs=[human_status, human_row]
         )
 
     with gr.Tab("图片向量检索"):
