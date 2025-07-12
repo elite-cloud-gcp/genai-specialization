@@ -120,30 +120,6 @@ rag_eval_task_rag = EvalTask(
 
 result_rag = rag_eval_task_rag.evaluate()
 
-# 调试：检查结果对象
-print("=== 调试结果对象 ===")
-print(f"结果对象类型: {type(result_rag)}")
-print(f"结果对象属性: {dir(result_rag)}")
-print(f"结果对象内容: {result_rag}")
-
-# 尝试不同的属性访问方式
-if hasattr(result_rag, 'metrics'):
-    print(f"metrics 属性存在: {result_rag.metrics}")
-else:
-    print("metrics 属性不存在")
-
-if hasattr(result_rag, 'results'):
-    print(f"results 属性存在: {result_rag.results}")
-else:
-    print("results 属性不存在")
-
-# 打印整个结果对象的字符串表示
-print(f"完整结果: {str(result_rag)}")
-
-# 打印评估结果
-print("=== 评估结果 ===")
-print(f"评估完成，共处理 {len(eval_dataset_rag)} 条数据")
-
 # 保存结果到文件
 import json
 import numpy as np
