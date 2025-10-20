@@ -1,0 +1,70 @@
+{
+    "1": {
+        "customer_id": 1234,
+        "firstName": "Amélie",
+        "lastName": "Dupont",
+        "email": "amelie.dupont@exemple.fr",
+        "phone": "+33-6-1234-5678",
+        "address": {
+            "street": "12 Rue de la Paix",
+            "city": "Paris",
+            "state": "Île-de-France",
+            "postalCode": "75002",
+            "country": "France"
+        },
+        "teletransmission": true,
+        "surcomplementaire": false,
+        "MemberCardIssuanceDate": "2023-12-25T00:00:00Z"
+    },
+    "2": {
+        "customer_id": 2345,
+        "firstName": "Pierre",
+        "lastName": "Martin",
+        "email": "pierre.martin@exemple.fr",
+        "phone": "+33-4-9876-5432",
+        "address": {
+            "street": "34 Avenue de la République",
+            "city": "Lyon",
+            "state": "Auvergne-Rhône-Alpes",
+            "postalCode": "69003",
+            "country": "France"
+        },
+        "teletransmission": false,
+        "surcomplementaire": true,
+        "MemberCardIssuanceDate": "2024-01-15T00:00:00Z"
+    },
+    "3": {
+        "customer_id": 3456,
+        "firstName": "Sophie",
+        "lastName": "Lefèvre",
+        "email": "sophie.lefevre@exemple.fr",
+        "phone": "+33-5-5678-9012",
+        "address": {
+            "street": "8 Rue de Rivoli",
+            "city": "Paris",
+            "state": "Île-de-France",
+            "postalCode": "75004",
+            "country": "France"
+        },
+        "teletransmission": true,
+        "surcomplementaire": true,
+        "MemberCardIssuanceDate": "2023-05-10T00:00:00Z"
+    },
+    "4": {
+        "customer_id": 4567,
+        "firstName": "Jean",
+        "lastName": "Bernard",
+        "email": "jean.bernard@exemple.fr",
+        "phone": "+33-2-3456-7890",
+        "address": {
+            "street": "5 Place de la Concorde",
+            "city": "Paris",
+            "state": "Île-de-France",
+            "postalCode": "75008",
+            "country": "France"
+        },
+        "teletransmission": false,
+        "surcomplementaire": false,
+        "MemberCardIssuanceDate": "2023-08-22T00:00:00Z"
+    }
+}

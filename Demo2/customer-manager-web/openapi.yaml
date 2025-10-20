@@ -1,0 +1,101 @@
+openapi: 3.0.3
+info:
+  title: Customer Information API
+  description: API for managing customer information including address details.
+  version: 1.0.0
+servers:
+  - url: "https://customer-api-xxxxxxx-uc.a.run.app" # Replace with your own url
+
+paths:
+  /api/customers/{customer_id}:
+    get:
+      summary: Get a customer by ID
+      operationId: get_customer
+      parameters:
+        - name: customer_id
+          in: path
+          description: ID of the customer to retrieve
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '404':
+          description: Customer not found
+
+    put:
+      summary: Update a customer by ID
+      operationId: update_customer
+      parameters:
+        - name: customer_id
+          in: path
+          description: ID of the customer to update
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Updated customer object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        '200':
+          description: Customer updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '404':
+          description: Customer not found
+
+components:
+  schemas:
+    Customer:
+      type: object
+      properties:
+        customer_id:
+          type: integer
+          format: int64
+          readOnly: true
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        address:
+          $ref: '#/components/schemas/Address'
+        MemberCardIssuanceDate:  
+          type: string
+          format: date-time
+        teletransmission: 
+          type: boolean
+          description: Whether teletransmission is enabled (yes/no)
+        surcomplementaire:
+          type: boolean
+          description: Whether surcomplementaire is enabled (yes/no) 
+
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string

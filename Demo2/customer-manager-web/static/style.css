@@ -1,0 +1,86 @@
+/* General Styles for the entire page */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0; /* Remove default margin for a clean layout */
+  background-color: #F8FAFC; /* Set a light gray background */
+  color: #333; /* Default text color */
+}
+
+header {
+  background-color: #FFF; /* White background for the header */
+  padding: 20px; 
+  display: flex; /* Use flexbox for easy alignment */
+  align-items: center; /* Vertically center items within the header */
+  border-bottom: 1px solid #E2E8F0; /* Add a subtle border to the bottom */
+}
+
+#logo {
+  height: 40px; /* Set the logo's height */
+  margin-right: 20px; /* Add spacing to the right of the logo */
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: 500; /* Slightly bold the header text */
+  margin: 0; /* Remove default margin for a clean layout */
+}
+
+/* Styles the main customer display area */
+main#customerContainer {
+  padding: 20px;
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid layout */
+  gap: 20px; /* Add spacing between customer cards */
+}
+
+/* Search bar styles */
+#searchInput {
+  width: 100%; /* Make the search bar full width */
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #E2E8F0;
+  border-radius: 4px;
+  box-sizing: border-box; 
+  font-size: 16px;
+}
+
+/* Styles for each individual customer card */
+.customerCard {
+  background-color: #FFF;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow effect */
+  transition: transform 0.2s, box-shadow 0.2s; /* Add a smooth hover transition */
+  display: flex; 
+  flex-direction: column; /* Arrange content vertically */
+}
+
+/* Style the button within the customer card */
+.customerCard button { 
+  background-color: #3B82F6; /* Set button background color */
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: auto; /* Push the button to the bottom */
+  align-self: center; /* Center the button horizontally */
+}
+
+/* Hover effect styles for the customer cards */
+.customerCard:hover {
+  transform: translateY(-2px); /* Slightly lift on hover */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Darken shadow on hover */
+}
+
+.customerCard h3 {
+  margin-top: 0;
+  color: #3B82F6;  /* Set the header text color */
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.customerCard p {
+  margin-bottom: 8px;
+  font-size: 15px; /* Slightly smaller font for customer details */
+}
