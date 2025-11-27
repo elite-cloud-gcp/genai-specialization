@@ -4,13 +4,21 @@ This project demonstrates a complete machine learning workflow for predicting ta
 
 ## Project Structure
 Demo4/
+
 ├── config.py                   # Global configuration
+
 ├── 1_data_exploration.ipynb    # ML 3.4.3.2: EDA
+
 ├── src/
+
 │   ├── preprocessing.sql       # ML 3.4.3.4: BigQuery Logic
+
 │   ├── train_model.py          # ML 3.4.3.3 - 3.4.3.7: Feature Eng, Training, Eval
+
 │   └── pipeline_job.py         # ML 3.4.3.6: Vertex AI Training Job submission
+
 └── 2_deploy_and_predict.py     # ML 3.4.4: Deployment & Prediction Proof
+
 
 -----
 
