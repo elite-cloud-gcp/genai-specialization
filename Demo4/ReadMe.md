@@ -6,9 +6,7 @@ This project demonstrates a complete machine learning workflow for predicting ta
 Demo4/
 
 ├── config.py                   # Global configuration
-
 ├── 1_data_exploration.ipynb    # ML 3.4.3.2: EDA
-
 ├── src/
 
 │   ├── preprocessing.sql       # ML 3.4.3.4: BigQuery Logic
